@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="مخيم أرض المرساة - المحرس | نثبت بالعمل وننجح بالإتقان">
-    <title>⚓ مخيم أرض المرساة - المحرس | كشافة بحرية</title>
+    <title>⚓ مخيم أرض المرساة - المحرس</title>
     
     <!-- فونتات عربية جميلة -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,10 +12,6 @@
     
     <style>
         :root {
-            --scout-brown: #5d4037;
-            --scout-green: #2e7d32;
-            --scout-beige: #d7ccc8;
-            --scout-gold: #f57c00;
             --anchor-blue: #0a2e5a;
             --sea-blue: #1a5276;
             --deep-blue: #071d36;
@@ -26,8 +22,10 @@
             --coral: #e74c3c;
             --seafoam: #2ecc71;
             --sky-blue: #3498db;
-            --campfire-orange: #e67e22;
-            --campfire-yellow: #f1c40f;
+            --white-anchor: #f9f9f9;
+            --wave-1: #1a5276;
+            --wave-2: #154360;
+            --wave-3: #112e4d;
             --shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -52,45 +50,31 @@
             min-height: 100vh;
         }
 
-        /* خلفية سماء المخيم الكشفي */
-        .camp-bg {
+        /* خلفية بحرية متحركة جديدة ومحسّنة */
+        .ocean-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -4;
+            z-index: -3;
             background: linear-gradient(180deg, 
                 #0a1f3a 0%, 
-                #081a30 30%, 
-                #061528 60%, 
-                #041020 80%, 
-                #030c18 100%
+                #081a30 20%, 
+                #061528 40%, 
+                #041020 60%, 
+                #030c18 80%, 
+                #020810 100%
             );
         }
 
-        /* نجوم لامعة في السماء */
-        .star {
-            position: fixed;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -3;
-            animation: twinkle 3s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        /* أمواج بحرية متحركة */
+        /* أمواج ثلاثية الأبعاد محسّنة */
         .wave-container {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 40%;
+            height: 100%;
             z-index: -2;
             overflow: hidden;
             pointer-events: none;
@@ -102,10 +86,11 @@
             height: 100%;
             background-repeat: repeat-x;
             background-position: 0 bottom;
+            opacity: 0.6;
         }
 
         .wave-1 {
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg"><path d="M0,300 C200,220 400,400 600,300 C800,200 1000,400 1200,300 L1200,600 L0,600 Z" fill="%231a5276" opacity="0.6"/></svg>') bottom;
+            background: url('image/svg+xml;utf8,<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg"><path d="M0,300 C200,220 400,400 600,300 C800,200 1000,400 1200,300 L1200,600 L0,600 Z" fill="%231a5276" opacity="0.6"/></svg>') bottom;
             animation: wave1 25s linear infinite;
             opacity: 0.5;
         }
@@ -137,178 +122,33 @@
             100% { background-position-x: 1200px; }
         }
 
-        /* نار المخيم */
-        .campfire {
+        /* تأثيرات ضوء الشمس تحت الماء - محسّنة للهاتف */
+        .caustics {
             position: fixed;
-            bottom: 15%;
-            left: 10%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            width: 80px;
-            height: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .fire-base {
-            width: 60px;
-            height: 20px;
-            background: #8d6e63;
-            border-radius: 10px 10px 0 0;
-            position: relative;
-            z-index: 2;
-        }
-
-        .fire-flame {
-            position: absolute;
-            bottom: 20px;
-            width: 40px;
-            height: 80px;
-            background: linear-gradient(to top, 
-                var(--campfire-orange), 
-                var(--campfire-yellow) 60%, 
-                rgba(255, 255, 200, 0.8) 90%, 
-                transparent
+            background: repeating-linear-gradient(
+                135deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.015) 1%,
+                transparent 2%,
+                rgba(255, 255, 255, 0.02) 3%,
+                transparent 4%
             );
-            border-radius: 50% 50% 20% 20%;
-            z-index: 1;
-            animation: fireFlicker 1.5s infinite alternate;
-            box-shadow: 0 0 30px var(--campfire-orange);
+            opacity: 0.4;
+            animation: causticsMove 20s linear infinite;
+            pointer-events: none;
         }
 
-        .fire-flame::before,
-        .fire-flame::after {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 70px;
-            background: inherit;
-            border-radius: 50% 50% 20% 20%;
+        @keyframes causticsMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
         }
 
-        .fire-flame::before {
-            left: -15px;
-            bottom: 10px;
-            animation: fireFlicker 1.8s infinite alternate-reverse;
-        }
-
-        .fire-flame::after {
-            right: -15px;
-            bottom: 5px;
-            animation: fireFlicker 2s infinite alternate;
-        }
-
-        @keyframes fireFlicker {
-            0%, 100% { transform: scaleY(1) translateX(0); opacity: 1; }
-            33% { transform: scaleY(0.9) translateX(-2px); opacity: 0.8; }
-            66% { transform: scaleY(1.1) translateX(2px); opacity: 0.9; }
-        }
-
-        /* خيمة كشفية */
-        .tent {
-            position: fixed;
-            bottom: 10%;
-            right: 15%;
-            z-index: -1;
-            width: 120px;
-            height: 100px;
-        }
-
-        .tent-body {
-            position: absolute;
-            bottom: 0;
-            width: 100px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--scout-brown) 0%, #4e342e 100%);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .tent-door {
-            position: absolute;
-            bottom: 10px;
-            left: 35px;
-            width: 30px;
-            height: 40px;
-            background: var(--scout-beige);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            border: 2px solid var(--scout-gold);
-        }
-
-        .tent-rope {
-            position: absolute;
-            width: 40px;
-            height: 3px;
-            background: var(--scout-beige);
-            top: 15px;
-            left: -35px;
-            transform: rotate(-15deg);
-        }
-
-        .tent-rope::after {
-            content: '';
-            position: absolute;
-            width: 3px;
-            height: 20px;
-            background: var(--scout-brown);
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* شجرة صنوبر */
-        .pine-tree {
-            position: fixed;
-            bottom: 5%;
-            right: 5%;
-            z-index: -1;
-            width: 60px;
-            height: 120px;
-        }
-
-        .tree-trunk {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 30px;
-            background: linear-gradient(to right, #5d4037, #795548, #5d4037);
-            border-radius: 0 0 5px 5px;
-        }
-
-        .tree-branches {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 30px solid transparent;
-            border-right: 30px solid transparent;
-            border-bottom: 90px solid var(--scout-green);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        }
-
-        /* شعار الكشافة - زنبق الكشافة */
-        .fleur-de-lis {
-            position: fixed;
-            top: 20%;
-            right: 10%;
-            z-index: -1;
-            font-size: 8rem;
-            color: rgba(255, 255, 255, 0.08);
-            transform: rotate(-15deg);
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            animation: rotateSlow 30s linear infinite;
-        }
-
-        @keyframes rotateSlow {
-            0% { transform: rotate(-15deg); }
-            100% { transform: rotate(345deg); }
-        }
-
-        /* فقاعات بحرية */
+        /* فقاعات متحركة - محسّنة للأداء */
         .bubble {
             position: fixed;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.1) 70%, transparent 100%);
@@ -339,22 +179,18 @@
             padding: 0 15px;
         }
 
-        /* الهيدر - طابع كشفي */
+        /* الهيدر - محسّن للهاتف */
         header {
             text-align: center;
             padding: 2rem 1.5rem 2.5rem;
             position: relative;
             overflow: hidden;
             margin-bottom: 1.5rem;
-            background: linear-gradient(145deg, 
-                rgba(93, 64, 55, 0.95) 0%, 
-                rgba(7, 29, 54, 0.98) 100%
-            );
+            background: linear-gradient(145deg, rgba(10, 46, 90, 0.95) 0%, rgba(7, 29, 54, 0.98) 100%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-            border-top: 3px solid var(--scout-gold);
-            border-image: linear-gradient(90deg, var(--scout-gold), var(--golden-sand), var(--scout-gold)) 1;
+            border-top: 3px solid var(--golden-sand);
         }
 
         .waves {
@@ -383,9 +219,9 @@
         .anchor-large {
             font-size: 4.5rem;
             margin: 10px 0;
-            color: var(--scout-gold);
+            color: var(--golden-sand);
             text-shadow: 
-                0 0 20px rgba(245, 124, 0, 0.8),
+                0 0 20px rgba(212, 176, 104, 0.8),
                 0 0 30px rgba(26, 82, 118, 0.9),
                 0 0 40px rgba(255, 255, 255, 0.5);
             animation: anchorFloat 3s ease-in-out infinite;
@@ -402,7 +238,7 @@
             font-family: 'Reem Kufi', 'Tajawal', sans-serif;
             font-size: 2.5rem;
             margin: 10px 0 5px;
-            background: linear-gradient(90deg, var(--sand-beige) 0%, var(--scout-gold) 50%, var(--sand-beige) 100%);
+            background: linear-gradient(90deg, var(--sand-beige) 0%, var(--golden-sand) 50%, var(--sand-beige) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -411,20 +247,6 @@
             line-height: 1.2;
             position: relative;
             text-align: center;
-        }
-
-        .scout-badge {
-            position: absolute;
-            top: -15px;
-            right: 15px;
-            font-size: 2rem;
-            color: var(--scout-gold);
-            animation: rotateBadge 8s linear infinite;
-        }
-
-        @keyframes rotateBadge {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .symbolic-frame {
@@ -447,27 +269,27 @@
             color: transparent;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             padding: 10px 20px;
-            background: rgba(93, 64, 55, 0.85);
+            background: rgba(10, 46, 90, 0.75);
             display: inline-block;
             border-radius: 40px;
-            border: 2px solid var(--scout-gold);
+            border: 2px solid var(--golden-sand);
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             font-family: 'Reem Kufi', 'Tajawal', sans-serif;
         }
 
-        /* المنيو - طابع كشفي */
+        /* المنيو - محسّن للهاتف */
         .nav-container {
-            background: rgba(93, 64, 55, 0.98);
+            background: rgba(7, 29, 54, 0.98);
             padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(245, 124, 0, 0.3);
-            border-top: 2px solid var(--scout-gold);
+            border-bottom: 1px solid rgba(212, 176, 104, 0.3);
+            border-top: 2px solid var(--golden-sand);
         }
 
         .nav-links {
@@ -491,7 +313,7 @@
             text-decoration: none;
             padding: 8px 15px;
             border-radius: 30px;
-            background: rgba(46, 125, 50, 0.3);
+            background: rgba(26, 82, 118, 0.3);
             margin: 3px;
             transition: var(--transition);
             font-weight: 600;
@@ -505,25 +327,31 @@
         }
 
         .nav-link:hover, .nav-link.active {
-            background: rgba(245, 124, 0, 0.3);
+            background: rgba(212, 176, 104, 0.3);
             color: white;
             transform: translateY(-2px);
-            border-color: var(--scout-gold);
+            border-color: var(--golden-sand);
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* الأقسام - طابع كشفي */
+        /* الأقسام - محسّنة للهاتف */
         section {
-            background: rgba(93, 64, 55, 0.85);
+            background: rgba(10, 35, 65, 0.9);
             border-radius: 18px;
             padding: 1.8rem;
             margin-bottom: 1.5rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             position: relative;
-            border: 2px solid rgba(245, 124, 0, 0.3);
+            border: 2px solid rgba(212, 176, 104, 0.3);
             backdrop-filter: blur(5px);
             overflow: hidden;
             transition: var(--transition);
+        }
+
+        section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 176, 104, 0.6);
         }
 
         section::before {
@@ -533,24 +361,7 @@
             right: 0;
             left: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--scout-green), var(--scout-gold), var(--scout-green));
-        }
-
-        section::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top, rgba(93, 64, 55, 0.4) 0%, transparent 70%);
-            z-index: 0;
-        }
-
-        section:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            border-color: rgba(245, 124, 0, 0.6);
+            background: linear-gradient(90deg, var(--wave-1), var(--golden-sand), var(--wave-1));
         }
 
         .section-content {
@@ -560,7 +371,7 @@
 
         h2 {
             font-family: 'Reem Kufi', 'Tajawal', sans-serif;
-            color: var(--scout-gold);
+            color: var(--golden-sand);
             font-size: 1.9rem;
             margin-bottom: 1.2rem;
             text-align: center;
@@ -569,7 +380,7 @@
         }
 
         h2::after {
-            content: "🏕️";
+            content: "⚓";
             position: absolute;
             bottom: -6px;
             left: 50%;
@@ -600,7 +411,7 @@
             position: absolute;
             right: 0;
             top: -3px;
-            color: var(--scout-gold);
+            color: var(--golden-sand);
             font-size: 1.8rem;
             line-height: 1;
         }
@@ -614,7 +425,7 @@
         }
 
         strong {
-            color: var(--scout-gold);
+            color: var(--golden-sand);
             font-weight: 700;
         }
 
@@ -631,7 +442,7 @@
             font-family: 'Reem Kufi', 'Tajawal', sans-serif;
         }
 
-        /* بطاقات القبائل - طابع كشفي */
+        /* بطاقات القبائل - محسّنة للهاتف */
         .tribes-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -640,16 +451,23 @@
         }
 
         .tribe-card {
-            background: linear-gradient(135deg, rgba(46, 125, 50, 0.9) 0%, rgba(29, 78, 216, 0.8) 100%);
+            background: rgba(5, 25, 45, 0.95);
             border-radius: 16px;
             padding: 22px 18px;
             text-align: center;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(245, 124, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
             height: 100%;
+        }
+
+        .tribe-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--golden-sand);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            z-index: 10;
         }
 
         .tribe-card::before {
@@ -659,17 +477,10 @@
             right: 0;
             width: 100%;
             height: 4px;
-            background: var(--scout-gold);
+            background: var(--golden-sand);
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.6s ease;
-        }
-
-        .tribe-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--scout-gold);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            z-index: 10;
         }
 
         .tribe-card:hover::before {
@@ -687,14 +498,14 @@
 
         .tribe-card:hover .tribe-symbol {
             transform: scale(1.1) rotate(3deg);
-            text-shadow: 0 0 18px rgba(245, 124, 0, 0.9);
+            text-shadow: 0 0 18px rgba(212, 176, 104, 0.9);
         }
 
         .tribe-name {
             font-size: 1.4rem;
             font-weight: 800;
             margin: 12px 0 10px;
-            color: white;
+            color: var(--golden-sand);
             font-family: 'Reem Kufi', 'Tajawal', sans-serif;
             min-height: 45px;
         }
@@ -706,7 +517,7 @@
             min-height: 65px;
         }
 
-        /* نظام المراسي - طابع كشفي */
+        /* نظام المراسي - محسّن للهاتف */
         .anchors-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -795,7 +606,7 @@
         .blue-anchor .educational-message { background: rgba(0, 0, 0, 0.3); color: #3498db; }
         .white-anchor .educational-message { background: rgba(26, 82, 118, 0.25); color: var(--anchor-blue); border-top-color: var(--anchor-blue); }
 
-        /* قائمة الأنشطة - طابع كشفي */
+        /* قائمة الأنشطة - محسّنة للهاتف */
         .activities-list {
             padding-right: 22px;
             margin: 18px 0;
@@ -810,16 +621,16 @@
         }
 
         .activities-list li::before {
-            content: "🔥";
+            content: "⛵";
             position: absolute;
             right: 0;
             top: 0;
-            color: var(--campfire-orange);
+            color: var(--golden-sand);
             font-size: 1.5rem;
         }
 
         .focus-list {
-            background: rgba(46, 125, 50, 0.7);
+            background: rgba(10, 40, 70, 0.7);
             border-right: 3px solid var(--seafoam);
             padding: 20px;
             border-radius: 14px;
@@ -846,7 +657,7 @@
             text-shadow: 0 0 6px rgba(46, 204, 113, 0.7);
         }
 
-        /* أهداف المجلس - طابع كشفي */
+        /* أهداف المجلس - محسّنة للهاتف */
         .council-goals {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -855,10 +666,10 @@
         }
 
         .goal-card {
-            background: rgba(93, 64, 55, 0.9);
+            background: rgba(5, 30, 60, 0.9);
             border-radius: 16px;
             padding: 22px;
-            border-right: 3px solid var(--scout-gold);
+            border-right: 3px solid var(--golden-sand);
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -873,7 +684,7 @@
         }
 
         .goal-card h3 {
-            color: var(--scout-gold);
+            color: var(--golden-sand);
             font-size: 1.5rem;
             margin-bottom: 12px;
             padding-right: 0;
@@ -893,16 +704,16 @@
             color: var(--light-sand);
         }
 
-        /* الخاتمة - طابع كشفي */
+        /* الخاتمة - محسّنة للهاتف */
         .conclusion {
             text-align: center;
             font-size: 1.5rem;
             line-height: 1.7;
             padding: 30px 20px;
-            background: rgba(93, 64, 55, 0.95);
+            background: rgba(5, 25, 50, 0.95);
             border-radius: 22px;
             margin-top: 22px;
-            border: 2px solid var(--scout-gold);
+            border: 2px solid var(--golden-sand);
             position: relative;
             overflow: hidden;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
@@ -910,7 +721,7 @@
         }
 
         .conclusion::before {
-            content: "🏕️";
+            content: "⚓";
             position: absolute;
             font-size: 10rem;
             opacity: 0.08;
@@ -918,8 +729,8 @@
             top: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
             z-index: 0;
-            color: var(--scout-gold);
-            text-shadow: 0 0 30px rgba(245, 124, 0, 0.8);
+            color: var(--golden-sand);
+            text-shadow: 0 0 30px rgba(212, 176, 104, 0.8);
         }
 
         .conclusion span {
@@ -928,20 +739,20 @@
             display: block;
             margin-top: 18px;
             font-weight: 800;
-            color: var(--scout-gold);
+            color: var(--golden-sand);
             font-size: 1.8rem;
-            text-shadow: 0 0 12px rgba(245, 124, 0, 0.9);
+            text-shadow: 0 0 12px rgba(212, 176, 104, 0.9);
             letter-spacing: 1.2px;
         }
 
-        /* الفوتر - طابع كشفي */
+        /* الفوتر - محسّن للهاتف */
         footer {
-            background: rgba(93, 64, 55, 0.98);
+            background: rgba(4, 19, 38, 0.98);
             color: var(--sand-beige);
             text-align: center;
             padding: 22px 15px;
             margin-top: 15px;
-            border-top: 2px solid var(--scout-gold);
+            border-top: 2px solid var(--golden-sand);
             position: relative;
             overflow: hidden;
             font-size: 1.1rem;
@@ -954,41 +765,41 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--scout-gold), transparent);
+            background: linear-gradient(90deg, transparent, var(--golden-sand), transparent);
         }
 
         .footer-logo {
             font-size: 2.5rem;
             margin: 10px 0;
-            color: var(--scout-gold);
-            text-shadow: 0 0 18px rgba(245, 124, 0, 0.8);
+            color: var(--golden-sand);
+            text-shadow: 0 0 18px rgba(212, 176, 104, 0.8);
             animation: anchorFloat 3s ease-in-out infinite;
         }
 
-        /* زر الصوت - طابع كشفي */
+        /* زر الصوت - محسّن للهاتف */
         .audio-control {
             position: fixed;
             bottom: 18px;
             left: 18px;
             z-index: 1000;
-            background: rgba(93, 64, 55, 0.9);
+            background: rgba(10, 46, 90, 0.9);
             width: 50px;
             height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--scout-gold);
+            color: var(--golden-sand);
             font-size: 1.4rem;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            border: 2px solid var(--scout-gold);
+            border: 2px solid var(--golden-sand);
             transition: var(--transition);
         }
 
         .audio-control:hover {
             transform: scale(1.1) rotate(3deg);
-            background: rgba(245, 124, 0, 0.2);
+            background: rgba(212, 176, 104, 0.2);
         }
 
         .audio-control.muted i.fa-volume-up {
@@ -1005,7 +816,7 @@
                 background: white;
                 color: black;
             }
-            .nav-container, footer, .audio-control, .camp-bg, .bubble, .wave-container, .campfire, .tent, .pine-tree, .star {
+            .nav-container, footer, .audio-control, .ocean-bg, .bubble, .caustics, .wave-container {
                 display: none !important;
             }
             section {
@@ -1216,75 +1027,24 @@
     </style>
 </head>
 <body>
-    <!-- خلفية مخيم كشفي بحري -->
-    <div class="camp-bg"></div>
+    <!-- الخلفية البحرية المحسّنة -->
+    <div class="ocean-bg"></div>
     
-    <!-- نجوم في السماء -->
+    <!-- الأمواج المتحركة -->
+    <div class="wave-container">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
+    </div>
+    
+    <!-- تأثيرات الضوء المحسّنة -->
+    <div class="caustics"></div>
+
+    <!-- السكريبتات -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // إنشاء النجوم
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                const size = Math.random() * 3 + 1;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 50;
-                const delay = Math.random() * 3;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${posX}%`;
-                star.style.top = `${posY}%`;
-                star.style.animationDelay = `${delay}s`;
-                document.body.appendChild(star);
-            }
-            
-            // إنشاء الأمواج
-            const waveContainer = document.createElement('div');
-            waveContainer.className = 'wave-container';
-            waveContainer.innerHTML = `
-                <div class="wave wave-1"></div>
-                <div class="wave wave-2"></div>
-                <div class="wave wave-3"></div>
-            `;
-            document.body.appendChild(waveContainer);
-            
-            // إنشاء نار المخيم
-            const campfire = document.createElement('div');
-            campfire.className = 'campfire';
-            campfire.innerHTML = `
-                <div class="fire-flame"></div>
-                <div class="fire-base"></div>
-            `;
-            document.body.appendChild(campfire);
-            
-            // إنشاء الخيمة
-            const tent = document.createElement('div');
-            tent.className = 'tent';
-            tent.innerHTML = `
-                <div class="tent-body">
-                    <div class="tent-door"></div>
-                </div>
-                <div class="tent-rope"></div>
-            `;
-            document.body.appendChild(tent);
-            
-            // إنشاء شجرة الصنوبر
-            const pineTree = document.createElement('div');
-            pineTree.className = 'pine-tree';
-            pineTree.innerHTML = `
-                <div class="tree-trunk"></div>
-                <div class="tree-branches"></div>
-            `;
-            document.body.appendChild(pineTree);
-            
-            // إنشاء شعار الزنبق الكشفي
-            const fleurDeLis = document.createElement('div');
-            fleurDeLis.className = 'fleur-de-lis';
-            fleurDeLis.innerHTML = '⚜️';
-            document.body.appendChild(fleurDeLis);
-            
-            // إنشاء الفقاعات البحرية
-            for (let i = 0; i < 15; i++) {
+            // إنشاء الفقاعات - محسّنة للأداء
+            for (let i = 0; i < 20; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
                 const size = Math.random() * 10 + 5;
@@ -1440,7 +1200,7 @@
                         <p>ترمز إلى القيم، السلوك القويم، والقدوة.</p>
                     </div>
                 </div>
-                <p style="margin-top: 25px; font-size: 1.2rem; text-align: center; font-weight: 600; color: var(--scout-gold);">
+                <p style="margin-top: 25px; font-size: 1.2rem; text-align: center; font-weight: 600; color: var(--golden-sand);">
                     لكل طليعة راية ورمز يميزها دون اعتماد أي ترتيب أو تصنيف تنافسي.
                 </p>
             </div>
@@ -1478,7 +1238,7 @@
                     يعتمد المخيم على <strong>تحفيز رمزي وصفي</strong> يتمثل في منح مراسي ملوّنة للطلائع،
                     وذلك تثمينًا لسلوك أو قيمة إيجابية برزت أثناء الأنشطة.
                 </p>
-                <div style="background: rgba(93, 64, 55, 0.85); border: 2px solid var(--scout-gold); border-radius: 20px; padding: 20px; margin: 25px 0; text-align: center;">
+                <div style="background: rgba(7, 35, 60, 0.85); border: 2px solid var(--golden-sand); border-radius: 20px; padding: 20px; margin: 25px 0; text-align: center;">
                     <p style="font-size: 1.3rem; margin: 10px 0; font-weight: 600;">✓ لا تُعتمد النقاط أو الترتيب التنافسي</p>
                     <p style="font-size: 1.3rem; margin: 10px 0; font-weight: 600;">✓ يمكن أن تتحصل أكثر من طليعة على نفس المرساة</p>
                     <p style="font-size: 1.3rem; margin: 10px 0; font-weight: 600;">✓ يمكن لطليعة واحدة أن تتحصل على أكثر من مرساة</p>
@@ -1580,9 +1340,9 @@
     <!-- الفوتر -->
     <footer>
         <div class="container">
-            <div class="footer-logo">⚜️</div>
+            <div class="footer-logo">⚓</div>
             <p>مخيم أرض المرساة - المحرس | نثبت بالعمل، وننجح بالإتقان</p>
-            <p style="margin-top: 8px; font-style: italic; color: var(--scout-gold);">
+            <p style="margin-top: 8px; font-style: italic; color: var(--golden-sand);">
                 "المرساة لا تمنع العاصفة، لكنها تمنع السفينة من الغرق"
             </p>
         </div>
