@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚓ مخيم أرض المرساة - المحرس | نثبت بالعمل وننجح بالإتقان</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+--anchor-blue: #0a2e5a;
+--sea-blue: #1a5276;
+--deep-blue: #071d36;
+--ocean-deep: #041326;
+--sand-beige: #e6d3a7;
+--light-sand: #f8f3e6;
+--golden-sand: #d4b068;
+--coral: #e74c3c;
+--seafoam: #2ecc71;
+--sky-blue: #3498db;
+--white-anchor: #f9f9f9;
+--wave-1: #1a5276;
+--wave-2: #154360;
+--wave-3: #112e4d;
+--shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.35);
+--transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--deep-blue) 100%);
+color: var(--light-sand);
+line-height: 1.7;
+overflow-x: hidden;
+position: relative;
+}
+
+/* Ocean background with caustics effect */
+.ocean-bg {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -3;
+background: linear-gradient(180deg, #0a1f3a 0%, #041326 40%, #030f1d 70%, #020a14 100%);
+}
+
+/* Animated waves using SVG */
+.wave-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -2;
+overflow: hidden;
+}
+
+.wave {
+position: absolute;
+width: 200%;
+height: 100%;
+background-repeat: repeat-x;
+background-position: 0 bottom;
+}
+
+.wave-1 {
+background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg"><path d="M0,300 C200,220 400,400 600,300 C800,200 1000,400 1200,300 L1200,600 L0,600 Z" fill="%231a5276" opacity="0.6"/></svg>') bottom;
+animation: wave1 25s linear infinite;
+}
+
+.wave-2 {
+background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg"><path d="M0,350 C200,270 400,450 600,350 C800,250 1000,450 1200,350 L1200,600 L0,600 Z" fill="%23154360" opacity="0.4"/></svg>') bottom;
+animation: wave2 30s linear infinite;
+}
+
+.wave-3 {
+background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg"><path d="M0,400 C200,320 400,500 600,400 C800,300 1000,500 1200,400 L1200,600 L0,600 Z" fill="%23112e4d" opacity="0.3"/></svg>') bottom;
+animation: wave3 35s linear infinite;
+}
+
+@keyframes wave1 {
+0% { background-position-x: 0; }
+100% { background-position-x: 1200px; }
+}
+
+@keyframes wave2 {
+0% { background-position-x: 0; }
+100% { background-position-x: -1200px; }
+}
+
+@keyframes wave3 {
+0% { background-position-x: 0; }
+100% { background-position-x: 1200px; }
+}
+
+/* Caustics light effect - sunlight through water */
+.caustics {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+background: repeating-linear-gradient(
+135deg,
+transparent 0%,
+rgba(255, 255, 255, 0.02) 1%,
+transparent 2%,
+rgba(255, 255, 255, 0.03) 3%,
+transparent 4%
+);
+opacity: 0.6;
+animation: causticsMove 20s linear infinite;
+}
+
+@keyframes causticsMove {
+0% { background-position: 0 0; }
+100% { background-position: 100px 100px; }
+}
+
+/* Floating bubbles */
+.bubble {
+position: fixed;
+background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 70%, transparent 100%);
+border-radius: 50%;
+pointer-events: none;
+z-index: -1;
+animation: bubbleFloat 15s infinite linear;
+}
+
+@keyframes bubbleFloat {
+0% { 
+transform: translateY(100vh) translateX(0) scale(0.5); 
+opacity: 0;
+}
+10% { opacity: 0.9; }
+50% { opacity: 0.7; }
+90% { opacity: 0.4; }
+100% { 
+transform: translateY(-100px) translateX(50px) scale(1.5); 
+opacity: 0;
+}
+}
+
+/* Floating seaweed */
+.seaweed {
+position: fixed;
+bottom: 0;
+width: 30px;
+height: 150px;
+background: linear-gradient(to top, #27ae60, #2ecc71);
+border-radius: 50% 50% 0 0;
+z-index: -1;
+animation: seaweedWave 8s ease-in-out infinite;
+}
+
+@keyframes seaweedWave {
+0%, 100% { transform: rotate(-5deg); }
+50% { transform: rotate(5deg); }
+}
+
+.container {
+width: 92%;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 15px;
+}
+
+/* Header with wave animation */
+header {
+text-align: center;
+padding: 3rem 1.5rem 4rem;
+position: relative;
+overflow: hidden;
+margin-bottom: 3rem;
+background: linear-gradient(145deg, rgba(10, 46, 90, 0.95) 0%, rgba(7, 29, 54, 0.98) 100%);
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+box-shadow: var(--shadow-strong);
+clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+border-top: 3px solid var(--golden-sand);
+}
+
+.waves {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 80px;
+background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 0L1200 0L1200 120C1000 80 800 120 600 100C400 120 200 80 0 120L0 0Z" fill="%23e6d3a7" fill-opacity="0.95"/></svg>');
+background-size: cover;
+animation: wave 8s linear infinite;
+}
+
+@keyframes wave {
+0% { background-position-x: 0; }
+100% { background-position-x: 1200px; }
+}
+
+.header-content {
+max-width: 900px;
+margin: 0 auto;
+position: relative;
+z-index: 2;
+}
+
+.anchor-large {
+font-size: 6rem;
+margin: 15px 0;
+color: var(--golden-sand);
+text-shadow: 
+0 0 25px rgba(212, 176, 104, 0.8),
+0 0 40px rgba(26, 82, 118, 0.9),
+0 0 60px rgba(255, 255, 255, 0.5);
+animation: anchorFloat 3s ease-in-out infinite;
+position: relative;
+display: inline-block;
+}
+
+.anchor-large::after {
+content: "";
+position: absolute;
+bottom: -15px;
+left: 50%;
+transform: translateX(-50%);
+width: 100px;
+height: 5px;
+background: linear-gradient(90deg, transparent, var(--golden-sand), transparent);
+border-radius: 2px;
+box-shadow: 0 0 15px rgba(212, 176, 104, 0.7);
+}
+
+@keyframes anchorFloat {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-15px); }
+}
+
+h1 {
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+font-size: 4.2rem;
+margin: 15px 0 5px;
+background: linear-gradient(90deg, var(--sand-beige) 0%, var(--golden-sand) 50%, var(--sand-beige) 100%);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+letter-spacing: -1.5px;
+line-height: 1.1;
+position: relative;
+text-align: center;
+}
+
+h1::after {
+content: "";
+position: absolute;
+bottom: -15px;
+left: 50%;
+transform: translateX(-50%);
+width: 90%;
+height: 4px;
+background: linear-gradient(90deg, transparent, var(--golden-sand), transparent);
+border-radius: 2px;
+box-shadow: 0 0 10px rgba(212, 176, 104, 0.6);
+}
+
+.symbolic-frame {
+font-size: 2.4rem;
+margin: 20px 0;
+font-weight: 700;
+color: var(--seafoam);
+text-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+letter-spacing: 3px;
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+}
+
+.slogan {
+font-size: 2.3rem;
+margin-top: 25px;
+font-weight: 800;
+background: linear-gradient(90deg, var(--coral) 0%, var(--seafoam) 100%);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+padding: 15px 35px;
+background: rgba(10, 46, 90, 0.75);
+display: inline-block;
+border-radius: 55px;
+border: 3px solid var(--golden-sand);
+position: relative;
+overflow: hidden;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+}
+
+.slogan::before {
+content: "";
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+animation: shine 3s infinite;
+}
+
+@keyframes shine {
+100% { left: 100%; }
+}
+
+/* Navigation */
+.nav-container {
+background: rgba(7, 29, 54, 0.98);
+padding: 15px 0;
+position: sticky;
+top: 0;
+z-index: 1000;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(212, 176, 104, 0.3);
+border-top: 2px solid var(--golden-sand);
+}
+
+.nav-links {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 8px;
+}
+
+.nav-link {
+color: var(--light-sand);
+text-decoration: none;
+padding: 10px 22px;
+border-radius: 40px;
+background: rgba(26, 82, 118, 0.3);
+margin: 5px;
+transition: var(--transition);
+font-weight: 600;
+font-size: 1.15rem;
+border: 2px solid transparent;
+position: relative;
+overflow: hidden;
+}
+
+.nav-link:hover, .nav-link.active {
+background: rgba(212, 176, 104, 0.3);
+color: white;
+transform: translateY(-3px);
+border-color: var(--golden-sand);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link::before {
+content: "";
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: rgba(255, 255, 255, 0.15);
+transition: 0.5s;
+}
+
+.nav-link:hover::before {
+left: 100%;
+}
+
+/* Section styling */
+section {
+background: rgba(10, 35, 65, 0.9);
+border-radius: 25px;
+padding: 3rem;
+margin-bottom: 2.5rem;
+box-shadow: var(--shadow-strong);
+position: relative;
+border: 2px solid rgba(212, 176, 104, 0.3);
+backdrop-filter: blur(10px);
+overflow: hidden;
+transition: var(--transition);
+}
+
+section:hover {
+transform: translateY(-5px);
+box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+border-color: rgba(212, 176, 104, 0.6);
+}
+
+section::before {
+content: "";
+position: absolute;
+top: 0;
+right: 0;
+left: 0;
+height: 6px;
+background: linear-gradient(90deg, var(--wave-1), var(--golden-sand), var(--wave-1));
+}
+
+section::after {
+content: "";
+position: absolute;
+bottom: 0;
+right: 0;
+width: 100%;
+height: 60%;
+background: radial-gradient(circle at top, rgba(10, 46, 90, 0.4) 0%, transparent 70%);
+z-index: 0;
+}
+
+.section-content {
+position: relative;
+z-index: 1;
+}
+
+h2 {
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+color: var(--golden-sand);
+font-size: 2.8rem;
+margin-bottom: 2rem;
+text-align: center;
+position: relative;
+padding-bottom: 15px;
+}
+
+h2::after {
+content: "⚓";
+position: absolute;
+bottom: -10px;
+left: 50%;
+transform: translateX(-50%);
+font-size: 2.2rem;
+color: var(--seafoam);
+text-shadow: 0 0 15px rgba(46, 204, 113, 0.7);
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0% { transform: translateX(-50%) scale(1); }
+50% { transform: translateX(-50%) scale(1.1); }
+100% { transform: translateX(-50%) scale(1); }
+}
+
+h3 {
+color: var(--seafoam);
+font-size: 2.1rem;
+margin: 1.8rem 0 1.3rem;
+position: relative;
+padding-right: 35px;
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+}
+
+h3::before {
+content: "•";
+position: absolute;
+right: 0;
+top: -5px;
+color: var(--golden-sand);
+font-size: 2.8rem;
+line-height: 1;
+}
+
+p {
+margin-bottom: 18px;
+font-size: 1.25rem;
+line-height: 1.8;
+color: var(--light-sand);
+text-align: justify;
+}
+
+strong {
+color: var(--golden-sand);
+font-weight: 700;
+}
+
+.symbolic-meaning {
+background: rgba(7, 35, 60, 0.85);
+border: 2px solid var(--seafoam);
+border-radius: 20px;
+padding: 28px;
+margin: 30px 0;
+font-size: 1.45rem;
+position: relative;
+text-align: center;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+}
+
+.symbolic-meaning::before,
+.symbolic-meaning::after {
+content: """;
+position: absolute;
+font-family: 'Reem Kufi', serif;
+font-size: 5rem;
+color: rgba(46, 204, 113, 0.3);
+line-height: 1;
+}
+
+.symbolic-meaning::before {
+top: -25px;
+right: 25px;
+}
+
+.symbolic-meaning::after {
+bottom: -40px;
+left: 25px;
+transform: rotate(180deg);
+}
+
+/* Tribes section */
+.tribes-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 30px;
+margin-top: 25px;
+}
+
+.tribe-card {
+background: rgba(5, 25, 45, 0.95);
+border-radius: 22px;
+padding: 32px 25px;
+text-align: center;
+box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+border: 2px solid rgba(255, 255, 255, 0.1);
+transition: var(--transition);
+position: relative;
+overflow: hidden;
+height: 100%;
+}
+
+.tribe-card:hover {
+transform: translateY(-12px) scale(1.03);
+border-color: var(--golden-sand);
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.55);
+z-index: 10;
+}
+
+.tribe-card::before {
+content: "";
+position: absolute;
+top: 0;
+right: 0;
+width: 100%;
+height: 6px;
+background: var(--golden-sand);
+transform: scaleX(0);
+transform-origin: right;
+transition: transform 0.6s ease;
+}
+
+.tribe-card:hover::before {
+transform: scaleX(1);
+transform-origin: left;
+}
+
+.tribe-symbol {
+font-size: 4.5rem;
+margin-bottom: 20px;
+display: block;
+text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+transition: var(--transition);
+}
+
+.tribe-card:hover .tribe-symbol {
+transform: scale(1.15) rotate(5deg);
+text-shadow: 0 0 25px rgba(212, 176, 104, 0.9);
+}
+
+.tribe-card:nth-child(1) .tribe-symbol { color: var(--coral); text-shadow: 0 0 20px rgba(231, 76, 60, 0.6); }
+.tribe-card:nth-child(2) .tribe-symbol { color: var(--seafoam); text-shadow: 0 0 20px rgba(46, 204, 113, 0.6); }
+.tribe-card:nth-child(3) .tribe-symbol { color: var(--sky-blue); text-shadow: 0 0 20px rgba(52, 152, 219, 0.6); }
+.tribe-card:nth-child(4) .tribe-symbol { color: var(--golden-sand); text-shadow: 0 0 20px rgba(212, 176, 104, 0.8); }
+.tribe-card:nth-child(5) .tribe-symbol { color: #f39c12; text-shadow: 0 0 20px rgba(243, 156, 18, 0.7); }
+
+.tribe-name {
+font-size: 2rem;
+font-weight: 800;
+margin: 18px 0 15px;
+color: var(--golden-sand);
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+min-height: 60px;
+}
+
+.tribe-card p {
+font-size: 1.35rem;
+color: var(--light-sand);
+margin-top: 10px;
+min-height: 80px;
+}
+
+/* Anchors system */
+.anchors-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 30px;
+margin-top: 30px;
+}
+
+.anchor-card {
+border-radius: 25px;
+padding: 35px 30px;
+color: white;
+position: relative;
+overflow: hidden;
+box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+transition: var(--transition);
+height: 100%;
+border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.anchor-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+border-color: rgba(255, 255, 255, 0.4);
+}
+
+.anchor-card::before {
+content: "⚓";
+position: absolute;
+font-size: 10rem;
+opacity: 0.12;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%) rotate(-15deg);
+z-index: 0;
+text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+}
+
+.anchor-card-content {
+position: relative;
+z-index: 1;
+text-align: center;
+}
+
+.anchor-title {
+font-size: 2.1rem;
+margin-bottom: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 15px;
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+min-height: 70px;
+}
+
+.anchor-title::before {
+content: "⚓";
+font-size: 2.3rem;
+}
+
+.yellow-anchor {
+background: linear-gradient(135deg, #e6b422 0%, #d19a0c 100%);
+color: var(--deep-blue);
+}
+
+.green-anchor {
+background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+}
+
+.red-anchor {
+background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.blue-anchor {
+background: linear-gradient(135deg, #2980b9 0%, #1a5276 100%);
+}
+
+.white-anchor {
+background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+color: var(--deep-blue);
+border: 3px solid var(--anchor-blue);
+}
+
+.educational-message {
+background: rgba(0, 0, 0, 0.25);
+border-radius: 18px;
+padding: 22px;
+margin-top: 22px;
+font-style: italic;
+font-size: 1.45rem;
+font-weight: 600;
+position: relative;
+border-top: 3px solid rgba(255, 255, 255, 0.5);
+min-height: 90px;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+
+.yellow-anchor .educational-message { background: rgba(44, 62, 80, 0.35); color: #f1c40f; }
+.green-anchor .educational-message { background: rgba(0, 0, 0, 0.3); color: #2ecc71; }
+.red-anchor .educational-message { background: rgba(0, 0, 0, 0.3); color: #e74c3c; }
+.blue-anchor .educational-message { background: rgba(0, 0, 0, 0.3); color: #3498db; }
+.white-anchor .educational-message { background: rgba(26, 82, 118, 0.25); color: var(--anchor-blue); border-top-color: var(--anchor-blue); }
+
+/* Activities section */
+.activities-list {
+padding-right: 30px;
+margin: 25px 0;
+}
+
+.activities-list li {
+margin-bottom: 18px;
+font-size: 1.4rem;
+position: relative;
+padding-right: 40px;
+padding-top: 8px;
+}
+
+.activities-list li::before {
+content: "⛵";
+position: absolute;
+right: 0;
+top: 0;
+color: var(--golden-sand);
+font-size: 1.9rem;
+animation: float 3s ease-in-out infinite;
+}
+
+.activities-list li:nth-child(2)::before { animation-delay: 0.3s; }
+.activities-list li:nth-child(3)::before { animation-delay: 0.6s; }
+.activities-list li:nth-child(4)::before { animation-delay: 0.9s; }
+.activities-list li:nth-child(5)::before { animation-delay: 1.2s; }
+
+.focus-list {
+background: rgba(10, 40, 70, 0.7);
+border-right: 5px solid var(--seafoam);
+padding: 28px;
+border-radius: 18px;
+margin: 35px 0;
+position: relative;
+}
+
+.focus-list::before {
+content: "";
+position: absolute;
+top: -5px;
+right: -5px;
+bottom: -5px;
+left: -5px;
+background: linear-gradient(45deg, transparent, rgba(46, 204, 113, 0.2), transparent);
+z-index: -1;
+border-radius: 23px;
+opacity: 0.6;
+animation: rotateGradient 8s linear infinite;
+}
+
+@keyframes rotateGradient {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.focus-list li {
+margin-bottom: 15px;
+padding-right: 35px;
+position: relative;
+font-size: 1.45rem;
+font-weight: 500;
+}
+
+.focus-list li::before {
+content: "✓";
+position: absolute;
+right: 5px;
+top: 3px;
+color: var(--seafoam);
+font-weight: bold;
+font-size: 1.8rem;
+text-shadow: 0 0 10px rgba(46, 204, 113, 0.7);
+}
+
+/* Council section */
+.council-goals {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 28px;
+margin-top: 30px;
+}
+
+.goal-card {
+background: rgba(5, 30, 60, 0.9);
+border-radius: 22px;
+padding: 30px;
+border-right: 5px solid var(--golden-sand);
+position: relative;
+overflow: hidden;
+text-align: center;
+transition: var(--transition);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.goal-card:hover {
+transform: scale(1.05);
+border-right-color: var(--seafoam);
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.goal-card h3 {
+color: var(--golden-sand);
+font-size: 2.1rem;
+margin-bottom: 18px;
+padding-right: 0;
+text-align: center;
+}
+
+.goal-card h3::before {
+right: 50%;
+transform: translateX(50%);
+top: -10px;
+font-size: 2.5rem;
+}
+
+.goal-card p {
+font-size: 1.4rem;
+min-height: 80px;
+color: var(--light-sand);
+}
+
+/* Conclusion section */
+.conclusion {
+text-align: center;
+font-size: 2.2rem;
+line-height: 1.8;
+padding: 45px;
+background: rgba(5, 25, 50, 0.95);
+border-radius: 30px;
+margin-top: 30px;
+border: 3px solid var(--golden-sand);
+position: relative;
+overflow: hidden;
+box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+}
+
+.conclusion::before {
+content: "⚓";
+position: absolute;
+font-size: 15rem;
+opacity: 0.08;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%) rotate(-15deg);
+z-index: 0;
+color: var(--golden-sand);
+text-shadow: 0 0 50px rgba(212, 176, 104, 0.8);
+}
+
+.conclusion span {
+position: relative;
+z-index: 1;
+display: block;
+margin-top: 25px;
+font-weight: 800;
+color: var(--golden-sand);
+font-size: 2.6rem;
+text-shadow: 0 0 20px rgba(212, 176, 104, 0.9);
+letter-spacing: 2px;
+}
+
+/* Footer */
+footer {
+background: rgba(4, 19, 38, 0.98);
+color: var(--sand-beige);
+text-align: center;
+padding: 35px 20px;
+margin-top: 20px;
+border-top: 3px solid var(--golden-sand);
+position: relative;
+overflow: hidden;
+font-size: 1.4rem;
+}
+
+footer::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 4px;
+background: linear-gradient(90deg, transparent, var(--golden-sand), transparent);
+}
+
+.footer-logo {
+font-size: 3.5rem;
+margin: 15px 0;
+color: var(--golden-sand);
+text-shadow: 0 0 25px rgba(212, 176, 104, 0.8);
+animation: anchorFloat 3s ease-in-out infinite;
+}
+
+/* Audio toggle */
+.audio-control {
+position: fixed;
+bottom: 25px;
+left: 25px;
+z-index: 1000;
+background: rgba(10, 46, 90, 0.9);
+width: 65px;
+height: 65px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--golden-sand);
+font-size: 1.8rem;
+cursor: pointer;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+border: 2px solid var(--golden-sand);
+transition: var(--transition);
+}
+
+.audio-control:hover {
+transform: scale(1.1) rotate(5deg);
+background: rgba(212, 176, 104, 0.2);
+}
+
+.audio-control i {
+transition: var(--transition);
+}
+
+.audio-control.muted i.fa-volume-up {
+display: none;
+}
+
+.audio-control:not(.muted) i.fa-volume-mute {
+display: none;
+}
+
+/* Print styles */
+@media print {
+body {
+background: white;
+color: black;
+}
+.nav-container, footer, .audio-control, .ocean-bg, .bubble, .caustics, .wave-container {
+display: none !important;
+}
+section {
+break-inside: avoid;
+box-shadow: none;
+border: 1px solid #ccc;
+background: white !important;
+}
+h1, h2, h3, .slogan, .symbolic-frame {
+color: #0a2e5a !important;
+text-shadow: none !important;
+}
+.tribe-card, .anchor-card, .goal-card {
+break-inside: avoid;
+page-break-inside: avoid;
+background: #f8f9fa !important;
+color: #0a2e5a !important;
+}
+.waves {
+display: none;
+}
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+h1 {
+font-size: 3.6rem;
+}
+.symbolic-frame {
+font-size: 2.1rem;
+}
+.slogan {
+font-size: 2rem;
+padding: 12px 30px;
+}
+section {
+padding: 2.5rem;
+}
+h2 {
+font-size: 2.5rem;
+}
+h3 {
+font-size: 1.9rem;
+}
+.anchor-large {
+font-size: 5rem;
+}
+.tribe-symbol {
+font-size: 4rem;
+}
+.tribe-name {
+font-size: 1.85rem;
+}
+}
+
+@media (max-width: 768px) {
+.nav-links {
+flex-direction: column;
+align-items: center;
+}
+.nav-link {
+width: 90%;
+margin: 6px 0;
+padding: 12px;
+font-size: 1.3rem;
+}
+h1 {
+font-size: 3.2rem;
+}
+.anchor-large {
+font-size: 4.5rem;
+}
+.symbolic-frame {
+font-size: 1.9rem;
+}
+.slogan {
+font-size: 1.9rem;
+padding: 12px 25px;
+}
+section {
+padding: 2rem;
+}
+h2 {
+font-size: 2.3rem;
+}
+h3 {
+font-size: 1.8rem;
+}
+p {
+font-size: 1.2rem;
+}
+.tribe-symbol {
+font-size: 3.8rem;
+}
+.tribe-name {
+font-size: 1.75rem;
+}
+.anchor-title {
+font-size: 1.9rem;
+}
+.educational-message {
+font-size: 1.35rem;
+padding: 18px;
+}
+.conclusion {
+font-size: 1.95rem;
+padding: 35px 25px;
+}
+.conclusion span {
+font-size: 2.3rem;
+}
+footer {
+font-size: 1.3rem;
+padding: 25px 15px;
+}
+.footer-logo {
+font-size: 3rem;
+}
+.audio-control {
+width: 55px;
+height: 55px;
+font-size: 1.6rem;
+}
+}
+
+@media (max-width: 480px) {
+header {
+padding: 2.5rem 1rem 3rem;
+}
+h1 {
+font-size: 2.9rem;
+letter-spacing: -1px;
+}
+.anchor-large {
+font-size: 4rem;
+}
+.symbolic-frame {
+font-size: 1.8rem;
+}
+.slogan {
+font-size: 1.75rem;
+padding: 10px 22px;
+}
+section {
+padding: 1.8rem;
+}
+h2 {
+font-size: 2.1rem;
+}
+h3 {
+font-size: 1.7rem;
+}
+p {
+font-size: 1.15rem;
+}
+.tribe-symbol {
+font-size: 3.5rem;
+}
+.tribe-name {
+font-size: 1.65rem;
+}
+.activities-list li {
+font-size: 1.3rem;
+padding-right: 35px;
+}
+.activities-list li::before {
+font-size: 1.7rem;
+}
+.focus-list li {
+font-size: 1.35rem;
+}
+.anchor-title {
+font-size: 1.8rem;
+}
+.educational-message {
+font-size: 1.3rem;
+}
+.conclusion {
+font-size: 1.8rem;
+padding: 30px 20px;
+}
+.conclusion span {
+font-size: 2.1rem;
+}
+footer {
+font-size: 1.25rem;
+padding: 22px 15px;
+}
+.footer-logo {
+font-size: 2.8rem;
+}
+.audio-control {
+width: 50px;
+height: 50px;
+font-size: 1.5rem;
+bottom: 15px;
+left: 15px;
+}
+}
+</style>
+</head>
+<body>
+<!-- Ocean background animation -->
+<div class="ocean-bg"></div>
+
+<!-- Animated waves -->
+<div class="wave-container">
+<div class="wave wave-1"></div>
+<div class="wave wave-2"></div>
+<div class="wave wave-3"></div>
+</div>
+
+<!-- Caustics light effect -->
+<div class="caustics"></div>
+
+<!-- Floating particles -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+// Create floating bubbles
+for (let i = 0; i < 30; i++) {
+const bubble = document.createElement('div');
+bubble.classList.add('bubble');
+// Random properties
+const size = Math.random() * 15 + 8;
+const posX = Math.random() * 100;
+const delay = Math.random() * 15;
+const duration = Math.random() * 15 + 20;
+const startX = Math.random() * 20 - 10;
+bubble.style.width = `${size}px`;
+bubble.style.height = `${size}px`;
+bubble.style.left = `${posX}%`;
+bubble.style.bottom = `-${size}px`;
+bubble.style.animationDelay = `${delay}s`;
+bubble.style.animationDuration = `${duration}s`;
+bubble.style.transform = `translateX(${startX}px)`;
+document.body.appendChild(bubble);
+}
+
+// Create seaweed
+for (let i = 0; i < 15; i++) {
+const seaweed = document.createElement('div');
+seaweed.classList.add('seaweed');
+const height = Math.random() * 100 + 50;
+const posX = Math.random() * 100;
+const delay = Math.random() * 5;
+const colorVariation = Math.random() * 30;
+seaweed.style.height = `${height}px`;
+seaweed.style.left = `${posX}%`;
+seaweed.style.bottom = '0';
+seaweed.style.animationDelay = `${delay}s`;
+seaweed.style.background = `linear-gradient(to top, hsl(${120 + colorVariation}, 60%, 30%), hsl(${140 + colorVariation}, 70%, 45%))`;
+document.body.appendChild(seaweed);
+}
+
+// Audio control
+const audioControl = document.createElement('div');
+audioControl.className = 'audio-control';
+audioControl.innerHTML = `<i class="fas fa-volume-up"></i><i class="fas fa-volume-mute"></i>`;
+document.body.appendChild(audioControl);
+
+let isMuted = localStorage.getItem('anchorCampMuted') === 'true';
+audioControl.classList.toggle('muted', isMuted);
+
+audioControl.addEventListener('click', () => {
+isMuted = !isMuted;
+audioControl.classList.toggle('muted', isMuted);
+localStorage.setItem('anchorCampMuted', isMuted.toString());
+// In a real implementation, this would control background audio
+if (!isMuted) {
+console.log('تشغيل أصوات البحر...');
+} else {
+console.log('إيقاف أصوات البحر...');
+}
+});
+
+// Smooth scrolling for navigation
+document.querySelectorAll('.nav-link').forEach(link => {
+link.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+if(targetId.startsWith('#')) {
+const targetSection = document.querySelector(targetId);
+if(targetSection) {
+window.scrollTo({
+top: targetSection.offsetTop - 80,
+behavior: 'smooth'
+});
+// Update active link
+document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+this.classList.add('active');
+}
+}
+});
+});
+
+// Set active link on scroll
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+let currentSection = '';
+sections.forEach(section => {
+const sectionTop = section.offsetTop - 150;
+if (pageYOffset >= sectionTop) {
+currentSection = `#${section.getAttribute('id')}`;
+}
+});
+
+navLinks.forEach(link => {
+link.classList.remove('active');
+if (link.getAttribute('href') === currentSection) {
+link.classList.add('active');
+}
+});
+});
+
+// Initialize active link
+navLinks[0].classList.add('active');
+});
+</script>
+
+<!-- Header Section -->
+<header>
+<div class="waves"></div>
+<div class="container">
+<div class="header-content">
+<div class="anchor-large">⚓</div>
+<h1>مخيم أرض المرساة – المحرس</h1>
+<div class="symbolic-frame">تسمية الإطار الرمزي: أرض المرساة – المحرس</div>
+<div class="slogan">نثبت بالعمل، وننجح بالإتقان</div>
+</div>
+</div>
+</header>
+
+<!-- Navigation -->
+<div class="nav-container">
+<div class="container">
+<div class="nav-links">
+<a href="#story" class="nav-link active">القصة الرمزية</a>
+<a href="#tribes" class="nav-link">الطلائع</a>
+<a href="#activities" class="nav-link">الأنشطة اليومية</a>
+<a href="#anchors" class="nav-link">نظام المراسي</a>
+<a href="#council" class="nav-link">مجلس أرض المرساة</a>
+<a href="#conclusion" class="nav-link">الخاتمة</a>
+</div>
+</div>
+</div>
+
+<div class="container">
+<!-- Symbolic Meaning Section -->
+<section>
+<div class="section-content">
+<h2>الدلالة الرمزية</h2>
+<div class="symbolic-meaning">
+ترمز المرساة إلى الثبات، الصبر، المسؤولية، وحماية السفينة،
+كما يرمز العمل المتقن إلى حماية الأرض واستقرارها.
+</div>
+</div>
+</section>
+
+<!-- Story Section -->
+<section id="story">
+<div class="section-content">
+<h2>القصة العامة للإطار الرمزي</h2>
+<p>تقع <strong>أرض المرساة</strong> على سواحل المحرس، وهي أرض لا يحميها السلاح ولا القوة، بل يحميها <strong>العمل، الجدّ، والإتقان</strong>.</p>
+<p>تسكن هذه الأرض قبائل بحرية عريقة، لكل قبيلة دور في الحفاظ على توازن الأرض واستقرارها. ولا تُقاس قيمة القبائل بالتنافس أو الغلبة، بل بمدى التزامها بالعمل، احترامها للبيئة، وروحها الكشفية.</p>
+<p>العمداء المشاركون في هذا المخيم هم <strong>حماة أرض المرساة</strong>، يتعلمون من البحر الصبر، ومن العمل الإتقان، ومن الجماعة المسؤولية.</p>
+</div>
+</section>
+
+<!-- Tribes Section -->
+<section id="tribes">
+<div class="section-content">
+<h2>تنظيم المشاركين (الطلائع)</h2>
+<p style="text-align: center; font-size: 1.45rem; margin-bottom: 30px;">يُقسَّم المشاركون إلى طلائع تحمل أسماء قبائل رمزية مرتبطة بالعمل والبحر:</p>
+<div class="tribes-container">
+<div class="tribe-card">
+<div class="tribe-symbol">💪</div>
+<div class="tribe-name">قبيلة السواعد</div>
+<p>ترمز إلى العمل والجدّ والإنجاز اليدوي.</p>
+</div>
+<div class="tribe-card">
+<div class="tribe-symbol">🌊</div>
+<div class="tribe-name">قبيلة النَّوَاتية</div>
+<p>ترمز إلى الصبر، التحمل، والعمل الجماعي البحري.</p>
+</div>
+<div class="tribe-card">
+<div class="tribe-symbol">🔧</div>
+<div class="tribe-name">قبيلة المِرباط</div>
+<p>ترمز إلى الإتقان، النظام، والمهارات الكشفية.</p>
+</div>
+<div class="tribe-card">
+<div class="tribe-symbol">🧭</div>
+<div class="tribe-name">قبيلة الشِّراع</div>
+<p>ترمز إلى القيادة، التوجيه، وتحمل المسؤولية.</p>
+</div>
+<div class="tribe-card">
+<div class="tribe-symbol">✨</div>
+<div class="tribe-name">قبيلة الفنار</div>
+<p>ترمز إلى القيم، السلوك القويم، والقدوة.</p>
+</div>
+</div>
+<p style="margin-top: 35px; font-size: 1.45rem; text-align: center; font-weight: 600; color: var(--golden-sand);">
+لكل طليعة راية ورمز يميزها دون اعتماد أي ترتيب أو تصنيف تنافسي.
+</p>
+</div>
+</section>
+
+<!-- Activities Section -->
+<section id="activities">
+<div class="section-content">
+<h2>الأنشطة والأعمال اليومية</h2>
+<h3>ممارسات أهل أرض المرساة</h3>
+<p style="text-align: center; margin: 25px 0; font-size: 1.45rem;">تشمل الأنشطة المتنوعة التي تعزز روح الكشفية والعمل الجماعي:</p>
+<ul class="activities-list">
+<li>المهارات والفنون الكشفية المتقدمة</li>
+<li>العقد والربطات البحرية الأصيلة</li>
+<li>نصب الخيام وفق معايير الحماية من العناصر</li>
+<li>أعمال مستوحاة من البحر (الحبال، الشبك، السلامة البحرية)</li>
+<li>أنشطة جماعية لبناء الفريق وتعزيز الثقة</li>
+</ul>
+<p style="text-align: center; margin: 30px 0 20px; font-size: 1.6rem; font-weight: 700; color: var(--seafoam);">
+ويُركز خلال جميع الأنشطة على:
+</p>
+<ul class="focus-list">
+<li>الإتقان قبل السرعة - الجودة تعلو على الكمية</li>
+<li>العمل الجماعي - قوة الجماعة تفوق مجموع الأفراد</li>
+<li>التعلم بالممارسة - التجربة أبلغ من القول</li>
+</ul>
+</div>
+</section>
+
+<!-- Anchors System Section -->
+<section id="anchors">
+<div class="section-content">
+<h2>منهجية التحفيز الرمزي (نظام المراسي)</h2>
+<p style="text-align: center; font-size: 1.45rem; margin: 25px 0;">
+يعتمد المخيم على <strong>تحفيز رمزي وصفي</strong> يتمثل في منح مراسي ملوّنة للطلائع،
+وذلك تثمينًا لسلوك أو قيمة إيجابية برزت أثناء الأنشطة.
+</p>
+<div style="background: rgba(7, 35, 60, 0.85); border: 2px solid var(--golden-sand); border-radius: 22px; padding: 28px; margin: 35px 0; text-align: center;">
+<p style="font-size: 1.6rem; margin: 15px 0; font-weight: 600;">✓ لا تُعتمد النقاط أو الترتيب التنافسي</p>
+<p style="font-size: 1.6rem; margin: 15px 0; font-weight: 600;">✓ يمكن أن تتحصل أكثر من طليعة على نفس المرساة</p>
+<p style="font-size: 1.6rem; margin: 15px 0; font-weight: 600;">✓ يمكن لطليعة واحدة أن تتحصل على أكثر من مرساة</p>
+</div>
+<h3 style="margin-top: 35px;">أنواع المراسي ودلالاتها التربوية</h3>
+<div class="anchors-container">
+<div class="anchor-card yellow-anchor">
+<div class="anchor-card-content">
+<div class="anchor-title">المرساة الصفراء – مرساة العمل الجماعي</div>
+<p>تُمنح للطليعة التي تميزت بروح الفريق، التعاون، وتقاسم الأدوار.</p>
+<div class="educational-message">في البحر، لا تنجو سفينة ببحّار واحد.</div>
+</div>
+</div>
+<div class="anchor-card green-anchor">
+<div class="anchor-card-content">
+<div class="anchor-title">المرساة الخضراء – مرساة الصداقة مع البيئة</div>
+<p>تُمنح للطليعة التي احترمت المحيط البيئي، حافظت على النظافة، وأظهرت وعيًا بيئيًا.</p>
+<div class="educational-message">من يحمي البحر، تحميه الأرض.</div>
+</div>
+</div>
+<div class="anchor-card red-anchor">
+<div class="anchor-card-content">
+<div class="anchor-title">المرساة الحمراء – مرساة القوة والجدّ</div>
+<p>تُمنح للطليعة التي أظهرت جدية، انضباطًا، ومثابرة في العمل.</p>
+<div class="educational-message">القوة الحقيقية هي الثبات في العمل.</div>
+</div>
+</div>
+<div class="anchor-card blue-anchor">
+<div class="anchor-card-content">
+<div class="anchor-title">المرساة الزرقاء – مرساة المهارة والإتقان</div>
+<p>تُمنح للطليعة التي أتقنت المهارات الكشفية والأعمال البحرية.</p>
+<div class="educational-message">البحر يحترم المتقنين.</div>
+</div>
+</div>
+<div class="anchor-card white-anchor">
+<div class="anchor-card-content">
+<div class="anchor-title">المرساة البيضاء – مرساة القيم والروح الكشفية</div>
+<p>تُمنح للطليعة التي كانت قدوة في السلوك، الالتزام، وروح الكشفية.</p>
+<div class="educational-message">القدوة أبلغ من القول.</div>
+</div>
+</div>
+</div>
+<h3 style="margin-top: 40px; text-align: center;">كيفية تقديم المراسي</h3>
+<ul class="focus-list">
+<li>تُعلّق المراسي على راية الطليعة أو لوحة الإطار الرمزي المخصصة</li>
+<li>يتم الإعلان عنها بكلمات تشجيعية ملهمة دون أي مقارنة بين الطلائع</li>
+<li>يُربط كل إعلان بالقيمة التربوية التي تمثلها المرساة لتعزيز التعلم الرمزي</li>
+</ul>
+</div>
+</section>
+
+<!-- Council Section -->
+<section id="council">
+<div class="section-content">
+<h2>التقييم الختامي - مجلس أرض المرساة</h2>
+<p style="text-align: center; font-size: 1.5rem; margin: 25px 0;">
+يُعقد مجلس ختامي احتفالي يهدف إلى تكريم رحلة التعلم وتعزيز القيم المكتسبة
+</p>
+<div class="council-goals">
+<div class="goal-card">
+<h3>تقييم العمل المنجز</h3>
+<p>استرجاع رحلة المخيم وتحليل التجارب التعليمية التي مر بها المشاركون</p>
+</div>
+<div class="goal-card">
+<h3>تثمين المجهودات</h3>
+<p>الاحتفاء بمجهودات جميع الطلائع دون تمييز، مع تسليط الضوء على التطور الفردي والجماعي</p>
+</div>
+<div class="goal-card">
+<h3>إبراز نقاط القوة</h3>
+<p>تحديد وتعزيز نقاط القوة الفريدة لكل طليعة وربطها بدورها في منظومة أرض المرساة</p>
+</div>
+</div>
+<p style="margin-top: 35px; font-size: 1.55rem; text-align: center;">
+<strong>ويتم خلال المجلس الختامي:</strong>
+</p>
+<ul class="focus-list">
+<li>استعراض المراسي التي تحصّلت عليها كل طليعة مع سرد قصص نجاح ملهمة</li>
+<li>ربط كل مرساة بالقيم المكتسبة وتأثيرها في بناء الشخصية الكشفية</li>
+<li>التأكيد على أن <strong>تنوع الأدوار والقيم هو ما حافظ على توازن أرض المرساة</strong></li>
+</ul>
+</div>
+</section>
+
+<!-- Conclusion Section -->
+<section id="conclusion">
+<div class="section-content">
+<h2>رسالة الختام</h2>
+<div class="conclusion">
+"لم تكن كل المراسي متشابهة،<br>
+لكن اجتماعها هو الذي ثبّت أرض المرساة.<br>
+بالعمل، بالجدّ، وبروح الكشفية،<br>
+صمدت أرض المرساة وازدهرت."
+<span>أرض المرساة - المحرس ⚓</span>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Footer -->
+<footer>
+<div class="container">
+<div class="footer-logo">⚓</div>
+<p>مخيم أرض المرساة - المحرس | نثبت بالعمل، وننجح بالإتقان</p>
+<p></p>
+<p style="margin-top: 12px; font-style: italic; color: var(--golden-sand);">
+"المرساة لا تمنع العاصفة، لكنها تمنع السفينة من الغرق"
+</p>
+</div>
+</footer>
+
+<script>
+// Simple scroll animation for elements
+document.addEventListener('DOMContentLoaded', function() {
+const observerOptions = {
+threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.opacity = 1;
+entry.target.style.transform = 'translateY(0)';
+}
+});
+}, observerOptions);
+
+// Observe sections and cards
+document.querySelectorAll('section, .tribe-card, .anchor-card, .goal-card').forEach(el => {
+el.style.opacity = 0;
+el.style.transform = 'translateY(20px)';
+el.style.transition = 'opacity 0.6s ease, transform 0.8s ease';
+observer.observe(el);
+});
+
+// Audio control functionality (simulated)
+const audioControl = document.querySelector('.audio-control');
+if (audioControl) {
+audioControl.addEventListener('click', () => {
+audioControl.classList.toggle('muted');
+// In a real implementation, this would toggle actual audio
+if (!audioControl.classList.contains('muted')) {
+console.log('تشغيل أصوات البحر...');
+} else {
+console.log('إيقاف أصوات البحر...');
+}
+});
+}
+});
+</script>
+</body>
+</html>
